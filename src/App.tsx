@@ -14,14 +14,7 @@ export type FilterValuesType = "all" | "active" | "completed";
 
 function App() {
 
-    // let [tasks, setTasks] = useState([
-    //     {id: v1(), title: "HTML&CSS", isDone: true},
-    //     {id: v1(), title: "JS", isDone: true},
-    //     {id: v1(), title: "ReactJS", isDone: false},
-    //     {id: v1(), title: "Rest API", isDone: false},
-    //     {id: v1(), title: "GraphQL", isDone: false},
-    // ]);
-    // let [filter, setFilter] = useState<FilterValuesType>("all");
+   
 
     let todolistID1=v1();
     let todolistID2=v1();
@@ -60,18 +53,23 @@ function App() {
       }
 
       function changeStatus(todolistID:string, taskId: string, isDone: boolean) {
-   
-         
            setTasks({...tasks,[todolistID]:tasks[todolistID].map(t=>t.id === taskId ? {...t,isDone:isDone}:t)});
       }
 
 
-
      function changeFilter(todolistID:string,value: FilterValuesType) {
-        
         setTodolists(todolists.map(filtered=>filtered.id===todolistID ? {...filtered,filter:value}:filtered))
      }
 
+     const changeTaskTitle  = (taskId: string, newTitle: string, todolistId: string) => {
+        debugger
+        let ourTodo = tasks[todolistId]
+        let ourTask = ourTodo.find(task => task.id ===taskId)
+        if (ourTask){
+            ourTask.title= newTitle
+        }
+        setTasks({...tasks})
+     }
 
     return (
         <div className="App">
@@ -97,6 +95,7 @@ function App() {
                         addTask={addTask}
                         changeTaskStatus={changeStatus}
                         filter={mapTodolists.filter}
+                        changeTaskTitle={changeTaskTitle}
                     />
                 )
             })}

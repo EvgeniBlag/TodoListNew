@@ -1,5 +1,5 @@
-import { Button, IconButton, TextField } from '@material-ui/core';
-import { ControlPoint } from '@material-ui/icons';
+import { Button, Grid, IconButton, TextField } from '@material-ui/core';
+// import { ControlPoint, Delete } from '@material-ui/icons';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {FilterValuesType} from './App';
@@ -21,6 +21,7 @@ type PropsType = {
     changeTaskStatus: (todolistID:string,taskId: string, isDone: boolean) => void
     filter: FilterValuesType
     changeTaskTitle:  (taskId: string, newTitle: string, todolistId: string) => void
+     removeTodoList: (id:string)=> void
 }
 
 export function Todolist(props: PropsType) {
@@ -48,86 +49,94 @@ export function Todolist(props: PropsType) {
         }
     }
 
+     const removeTodoList = () => props.removeTodoList(props.todolistID)
+
     const onAllClickHandler = () => props.changeFilter(props.todolistID , "all");
     const onActiveClickHandler = () => props.changeFilter(props.todolistID ,"active");
     const onCompletedClickHandler = () => props.changeFilter(props.todolistID ,"completed");
-
     const onChangeTaskTitleHandler = (taskId:string, newTitle: string) => {
         props.changeTaskTitle(taskId, newTitle, props.todolistID)
     }
 
     return(
 
-     <div>
+        <Grid item>
+            <div>
+                <h3>
+                    {props.title}
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={removeTodoList}
+                    >
+                        Delete All
+                    </Button>
+                </h3>
+                <div>
+                    <TextField
+                        id="outlined-basic"
+                        label="Type value"
+                        variant="outlined"
+                        value={title}
+                        onChange={onChangeHandler}
+                        onKeyPress={onKeyPressHandler}
+                        className={error ? "error" : ""}
+                        multiline
+                        error={!!error}
+                        helperText={error}
+                    />
+                    <IconButton
+                        onClick={addTask}
+                        color={'primary'}>
+                        < AddBoxIcon />
+                    </IconButton>
+                </div>
 
-        <h3>{props.title}</h3>
+                <ul>
+                    {
+                        props.tasks.map(t => {
+                            const removeHandler = (taskId: string) => props.removeTask(props.todolistID, t.id)
 
-        <div>
-            <TextField
-                id="outlined-basic"
-                label="Type value"
-                variant="outlined"
-                value={title}
-                onChange={onChangeHandler}
-                onKeyPress={onKeyPressHandler}
-                className={error ? "error" : ""}
-                multiline
-                error={!!error}
-                helperText={error}
-            />
-         
-            <IconButton
-                onClick={addTask}
-                color={'primary'}>
-                < AddBoxIcon/>
-            </IconButton>
+                            const changeStatusTask = (taskId: string, status: boolean) => {
+                                props.changeTaskStatus(props.todolistID, taskId, status);
+                            }
 
-           
-        </div>
-        <ul>
-            {
-                props.tasks.map(t => {
-                    const removeHandler = (taskId: string) => props.removeTask(props.todolistID ,t.id)
-
-                    const changeStatusTask = (taskId:string , status: boolean) => {
-                       props.changeTaskStatus(props.todolistID,taskId,status);
+                            return (
+                                <Task
+                                    changeStatusTask={changeStatusTask}
+                                    removeHandler={removeHandler}
+                                    task={t}
+                                    todolistID={props.todolistID}
+                                    onChangeTaskTitleHandler={(title: string) => onChangeTaskTitleHandler(t.id, title)}
+                                />
+                            )
+                        })
                     }
+                </ul>
+                <div>
+                    <Button
 
-                    return(
-                        <Task
-                        changeStatusTask={changeStatusTask}
-                        removeHandler={removeHandler}
-                        task={t}
-                        todolistID={props.todolistID}
-                        onChangeTaskTitleHandler={(title:string)=> onChangeTaskTitleHandler(t.id, title)}
-                        />
-                    )
-                })
-            }
-        </ul>
-        <div>
-            <Button
-              
-                variant={props.filter === 'all' ? "contained" : "text"}
-                onClick={onAllClickHandler}>
-                All
-            </Button>
+                        variant={props.filter === 'all' ? "contained" : "text"}
+                        onClick={onAllClickHandler}>
+                        All
+                    </Button>
 
-            <Button
-                color={"primary"}
-                variant={props.filter === 'active' ? "contained" : "text"}
-                onClick={onActiveClickHandler}>
-                Active
-            </Button>
+                    <Button
+                        color={"primary"}
+                        variant={props.filter === 'active' ? "contained" : "text"}
+                        onClick={onActiveClickHandler}>
+                        Active
+                    </Button>
 
-            <Button
-                color={"secondary"}
-                variant={props.filter === 'completed' ? "contained" : "text"}
-                onClick={onCompletedClickHandler}>
-                Completed
-            </Button>
+                    <Button
+                        color={"secondary"}
+                        variant={props.filter === 'completed' ? "contained" : "text"}
+                        onClick={onCompletedClickHandler}>
+                        Completed
+                    </Button>
+                </div>
+            </div>
 
-        </div>
-    </div>
+        </Grid>
     )
 }

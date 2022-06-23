@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import './App.css';
 import {Todolist} from './Todolist';
 import {v1} from 'uuid';
-import { AppBar, Button, Container, Grid, IconButton, Toolbar, Typography  } from '@material-ui/core';
+import { AppBar, Button, Container, Grid, IconButton, TextField, Toolbar, Typography  } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import AddBoxIcon from '@material-ui/icons/AddBox';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,6 +30,8 @@ export type todolistsType = {
 export type FilterValuesType = "all" | "active" | "completed";
 
 function App() {
+
+    const [titleTodoList,setTitleTodolist] = useState("");
 
     let todolistID1=v1();
     let todolistID2=v1();
@@ -92,7 +95,23 @@ function App() {
         }
         setTasks({...tasks})
      }
+
+      const addNewTitleTodolist = (e: ChangeEvent<HTMLInputElement>) => {
+         setTitleTodolist(e.currentTarget.value)
+      }
      
+       const addTodolist = (todolistID:string) => {
+          const newId =v1();
+         const newTodolist:todolistsType = {id:newId, title:titleTodoList, filter: 'all'}
+         setTodolists([newTodolist,...todolists])
+         setTasks({...tasks,[newId]:[{id: v1(), title: "HTML&CSS2", isDone: true},
+         {id: v1(), title: "JS2", isDone: true},
+         {id: v1(), title: "ReactJS2", isDone: false},
+         {id: v1(), title: "Rest API2", isDone: false},]})
+         setTitleTodolist("")
+
+       }
+
      
     return (
        
@@ -104,15 +123,33 @@ function App() {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>
-                        News
+                       <h3 style={{color:"red"}}> La lista,de las tareas</h3>
                     </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
             </AppBar>
 
-
             <Container fixed>
-                <Grid container spacing={8}>
+
+           <div style={{display:"flex",padding:"30px"}}>
+
+                    <TextField
+                      value={titleTodoList}
+                      onChange={addNewTitleTodolist}
+                     />
+
+                    <IconButton
+                     onClick={addTodolist}
+                        color={'primary'}>
+                        < AddBoxIcon />
+                    </IconButton>
+             <h4 style={{color:"green"}}> //Este campo , esta para añadir un bloque nuevo.</h4>
+             </div>
+                
+              
+
+
+                <Grid container spacing={8} style={{padding:"30px"}}>
                 {todolists.map((mapTodolists: todolistsType) => {
 
                     let tasksForTodolist = tasks[mapTodolists.id];

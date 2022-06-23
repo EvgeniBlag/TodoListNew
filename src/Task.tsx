@@ -1,6 +1,5 @@
-import { Button, Checkbox, FormControlLabel, IconButton } from "@material-ui/core";
+import { Button, Checkbox,IconButton } from "@material-ui/core";
 import { Delete } from "@material-ui/icons";
-import DeleteIcon from '@material-ui/icons/Delete';
 import React, { ChangeEvent } from "react";
 import { EditableSpan } from "./EditableSpan";
 import { TaskType } from './Todolist'
@@ -31,7 +30,7 @@ export const Task = (props:TaskPropsType) => {
 
     return (
        <div>
-        <li key={props.task.id} className={props.task.isDone ? "is-done" : ""}>
+        <div key={props.task.id} className={props.task.isDone ? "is-done" : ""}>
 
                 <Checkbox
                     checked={props.task.isDone}
@@ -39,13 +38,13 @@ export const Task = (props:TaskPropsType) => {
                 /> 
 
               
-        {/* <span>{props.task.title}</span> */}
+       
          <EditableSpan old_title={props.task.title} changeItemText= {(title: string) => changeTaskTitle(title)}  />
 
                 <IconButton onClick={deleteTaskHandler}>
                     <Delete />
                 </IconButton>
-    </li>
+    </div>
     </div>
    
     )

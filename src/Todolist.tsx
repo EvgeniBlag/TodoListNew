@@ -1,9 +1,10 @@
-import { Button, Grid, IconButton, TextField } from '@material-ui/core';
-// import { ControlPoint, Delete } from '@material-ui/icons';
+import { Button, Grid, IconButton, makeStyles, Paper, TextField, Theme , createStyles } from '@material-ui/core';
+import { Delete } from '@material-ui/icons';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {FilterValuesType} from './App';
 import { Task } from './Task';
+// import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 export type TaskType = {
     id: string
@@ -24,7 +25,24 @@ type PropsType = {
      removeTodoList: (id:string)=> void
 }
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      '& > *': {
+        margin: theme.spacing(1),
+        width: theme.spacing(16),
+        height: theme.spacing(16),
+      },
+    },
+  }),
+);
+
 export function Todolist(props: PropsType) {
+
+   
+        const classes = useStyles();
 
     let [title, setTitle] = useState("")
     let [error, setError] = useState<string | null>(null)
@@ -44,7 +62,7 @@ export function Todolist(props: PropsType) {
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         setError(null);
-        if (e.charCode === 13) {
+        if (e.key === "Enter") {
             addTask();
         }
     }
@@ -58,20 +76,20 @@ export function Todolist(props: PropsType) {
         props.changeTaskTitle(taskId, newTitle, props.todolistID)
     }
 
-    return(
-
+    return (
         <Grid item>
-            <div>
-                <h3>
-                    {props.title}
-                    <Button
-                        variant="contained"
-                        color="secondary"
-                        onClick={removeTodoList}
-                    >
-                        Delete All
-                    </Button>
-                </h3>
+            <Paper elevation={3} style={{ padding: "10px" }}>
+                <div>
+                    <div style={{ display: "flex" }}>
+                        <h3>
+                            {props.title}
+                        </h3>
+
+                        <IconButton onClick={removeTodoList} >
+                            <Delete />
+                        </IconButton>
+                    </div>
+       
                 <div>
                     <TextField
                         id="outlined-basic"
@@ -92,7 +110,7 @@ export function Todolist(props: PropsType) {
                     </IconButton>
                 </div>
 
-                <ul>
+                <div>
                     {
                         props.tasks.map(t => {
                             const removeHandler = (taskId: string) => props.removeTask(props.todolistID, t.id)
@@ -112,7 +130,7 @@ export function Todolist(props: PropsType) {
                             )
                         })
                     }
-                </ul>
+                </div>
                 <div>
                     <Button
 
@@ -136,7 +154,12 @@ export function Todolist(props: PropsType) {
                     </Button>
                 </div>
             </div>
-
-        </Grid>
+       
+            </Paper > 
+            </Grid>
+            
+            
+       
+    
     )
 }

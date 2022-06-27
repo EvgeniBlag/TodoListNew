@@ -23,7 +23,6 @@ export const Task = (props:TaskPropsType) => {
         props.changeStatusTask(props.task.id, e.currentTarget.checked )
     }
 
-
     const changeTaskTitle = (title: string) => {
         props.onChangeTaskTitleHandler(title)
     }
@@ -39,7 +38,10 @@ export const Task = (props:TaskPropsType) => {
 
               
        
-         <EditableSpan old_title={props.task.title} changeItemText= {(title: string) => changeTaskTitle(title)}  />
+                <EditableSpan
+                    old_title={props.task.title}
+                    changeItemText={(title: string) => changeTaskTitle(title)}
+                />
 
                 <IconButton onClick={deleteTaskHandler}>
                     <Delete />

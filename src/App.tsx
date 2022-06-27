@@ -31,7 +31,7 @@ export type FilterValuesType = "all" | "active" | "completed";
 
 function App() {
 
-    const [titleTodoList,setTitleTodolist] = useState("");
+     const [titleTodoList,setTitleTodolist] = useState("");
 
     let todolistID1=v1();
     let todolistID2=v1();
@@ -87,31 +87,35 @@ function App() {
      }
 
      const changeTaskTitle  = (taskId: string, newTitle: string, todolistId: string) => {
-        debugger
         let ourTodo = tasks[todolistId]
         let ourTask = ourTodo.find(task => task.id ===taskId)
         if (ourTask){
-            ourTask.title= newTitle
+            ourTask.title = newTitle
         }
         setTasks({...tasks})
      }
 
-      const addNewTitleTodolist = (e: ChangeEvent<HTMLInputElement>) => {
-         setTitleTodolist(e.currentTarget.value)
-      }
-     
-       const addTodolist = (todolistID:string) => {
-          const newId =v1();
-         const newTodolist:todolistsType = {id:newId, title:titleTodoList, filter: 'all'}
-         setTodolists([newTodolist,...todolists])
-         setTasks({...tasks,[newId]:[{id: v1(), title: "HTML&CSS2", isDone: true},
-         {id: v1(), title: "JS2", isDone: true},
-         {id: v1(), title: "ReactJS2", isDone: false},
-         {id: v1(), title: "Rest API2", isDone: false},]})
-         setTitleTodolist("")
-
+       const addNewTitleTodolist = (e: ChangeEvent<HTMLInputElement>) => {
+          setTitleTodolist(e.currentTarget.value)
        }
-
+     
+    const addTodolist = () => {
+        const newId = v1();
+        const newTodolist: todolistsType = { id: newId, title: titleTodoList, filter: 'all' }
+        setTodolists([newTodolist, ...todolists])
+        setTasks({...tasks, [newId]: [
+                { id: v1(), title: "HTML&CSS2", isDone: true },
+                { id: v1(), title: "JS2", isDone: true },
+                { id: v1(), title: "ReactJS2", isDone: false },
+                { id: v1(), title: "Rest API2", isDone: false },]
+        })
+        setTitleTodolist("")
+       }
+  
+       
+    const editTodolist = (todolistId:string,newTitle:string)=>{
+        setTodolists(todolists.map(el=>el.id===todolistId?{...el,title:newTitle}:el))
+    }
      
     return (
        
@@ -138,11 +142,11 @@ function App() {
                       onChange={addNewTitleTodolist}
                      />
 
-                    <IconButton
+                     <IconButton
                      onClick={addTodolist}
-                        color={'primary'}>
+                        color={'primary'}> 
                         < AddBoxIcon />
-                    </IconButton>
+                    </IconButton> 
              <h4 style={{color:"green"}}> //Este campo , esta para añadir un bloque nuevo.</h4>
              </div>
                 
@@ -173,6 +177,7 @@ function App() {
                             changeTaskStatus={changeStatus}
                             filter={mapTodolists.filter}
                             changeTaskTitle={changeTaskTitle}
+                            editTodolist={editTodolist}
                         />
                     )
                 })}
@@ -181,6 +186,7 @@ function App() {
         </div>
 
     );
+ 
 }
 
 export default App;

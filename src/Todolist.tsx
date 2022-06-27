@@ -3,8 +3,9 @@ import { Delete } from '@material-ui/icons';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {FilterValuesType} from './App';
+import { EditableSpanTitle } from './EditableSpanTitle';
 import { Task } from './Task';
-// import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+
 
 export type TaskType = {
     id: string
@@ -23,6 +24,7 @@ type PropsType = {
     filter: FilterValuesType
     changeTaskTitle:  (taskId: string, newTitle: string, todolistId: string) => void
      removeTodoList: (id:string)=> void
+     editTodolist:(todolistId:string,newTitle:string)=>void
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -76,13 +78,26 @@ export function Todolist(props: PropsType) {
         props.changeTaskTitle(taskId, newTitle, props.todolistID)
     }
 
+
+
+    // const addTaskHandler = (title:string)=>{
+    //     props.addTask(title,props.id)
+    // }
+
+    const editTodolistHandler=(newTitle:string)=>{
+      props.editTodolist(props.todolistID,newTitle)
+    }
+
     return (
         <Grid item>
             <Paper elevation={3} style={{ padding: "10px" }}>
                 <div>
                     <div style={{ display: "flex" }}>
                         <h3>
-                            {props.title}
+                            <EditableSpanTitle
+                            title={props.title}
+                            addTask={editTodolistHandler}
+                            />
                         </h3>
 
                         <IconButton onClick={removeTodoList} >
@@ -121,6 +136,7 @@ export function Todolist(props: PropsType) {
 
                             return (
                                 <Task
+                                // onKeyPress={onKeyPressHandler}
                                     changeStatusTask={changeStatusTask}
                                     removeHandler={removeHandler}
                                     task={t}
@@ -133,7 +149,6 @@ export function Todolist(props: PropsType) {
                 </div>
                 <div>
                     <Button
-
                         variant={props.filter === 'all' ? "contained" : "text"}
                         onClick={onAllClickHandler}>
                         All
@@ -154,12 +169,7 @@ export function Todolist(props: PropsType) {
                     </Button>
                 </div>
             </div>
-       
             </Paper > 
             </Grid>
-            
-            
-       
-    
     )
 }

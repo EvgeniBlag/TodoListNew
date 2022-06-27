@@ -17,20 +17,19 @@ export const EditableSpanTitle = (props:EditableSpanTitlePropsType) => {
     }
 
     
-
-
-
     const EditTrueHandler = () => {
         setEdit(!edit)
         props.addTask(newTitle)
     }
 
-     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-         setError(null);
-         if (e.key === "Enter") {
-             props.addTask(newTitle);
-         }
-     }
+    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+        
+        if (e.key === "Enter") {
+            setEdit(!edit)
+            props.addTask(newTitle);
+
+        }
+    }
 
     // const addTask = () => {
     //     let changeTitle = newTitle.trim();
@@ -45,7 +44,7 @@ export const EditableSpanTitle = (props:EditableSpanTitlePropsType) => {
     return (
         edit ?
             <input
-                 onKeyPress={onKeyPressHandler}
+                onKeyPress={onKeyPressHandler}
                 onBlur={EditTrueHandler}
                 autoFocus
                 type="text"
@@ -54,7 +53,7 @@ export const EditableSpanTitle = (props:EditableSpanTitlePropsType) => {
             />
          :
             <span
-                onDoubleClick={EditTrueHandler} >
+             onDoubleClick={EditTrueHandler} >
                 {props.title}
             </span>
     )

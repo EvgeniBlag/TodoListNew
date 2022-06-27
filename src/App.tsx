@@ -87,12 +87,15 @@ function App() {
      }
 
      const changeTaskTitle  = (taskId: string, newTitle: string, todolistId: string) => {
-        let ourTodo = tasks[todolistId]
-        let ourTask = ourTodo.find(task => task.id ===taskId)
-        if (ourTask){
-            ourTask.title = newTitle
-        }
-        setTasks({...tasks})
+
+        setTasks({...tasks,[todolistId]:tasks[todolistId].map(el=>el.id===taskId?{...el,title:newTitle}:el)})
+
+        // let ourTodo = tasks[todolistId]
+        // let ourTask = ourTodo.find(task => task.id ===taskId)
+        // if (ourTask){
+        //     ourTask.title = newTitle
+        // }
+        // setTasks({...tasks})
      }
 
        const addNewTitleTodolist = (e: ChangeEvent<HTMLInputElement>) => {

@@ -1,25 +1,24 @@
 import React, {ChangeEvent, useState} from 'react';
-import './App.css';
 import {Todolist} from './Todolist';
 import {v1} from 'uuid';
-import { AppBar, Button, Container, Grid, IconButton, TextField, Toolbar, Typography  } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
+import { Container, Grid, IconButton, TextField  } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AddBoxIcon from '@material-ui/icons/AddBox';
+import { HeaderBar } from './HeaderBar';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      flexGrow: 1,
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
-    title: {
-      flexGrow: 1,
-    },
-  }),
-);
+ const useStyles = makeStyles((theme: Theme) =>
+   createStyles({
+     root: {
+       flexGrow: 1,
+     },
+     menuButton: {
+       marginRight: theme.spacing(2),
+     },
+     title: {
+       flexGrow: 1,
+     },
+   }),
+ );
 
 export type todolistsType = {
         id: string
@@ -36,7 +35,7 @@ function App() {
     let todolistID1=v1();
     let todolistID2=v1();
 
-    const classes = useStyles();
+     const classes = useStyles();
 
     let [todolists, setTodolists] = useState<Array<todolistsType>>([
         {id: todolistID1, title: 'What to learn', filter: 'all'},
@@ -44,7 +43,7 @@ function App() {
     ])
 
      const removeTodoList = (id:string) => {
-        setTodolists(todolists.filter(t=>t.id !==id))
+        setTodolists(todolists.filter(t=>t.id !== id))
        let newTasks = {...tasks}
        delete newTasks[id]
         setTasks (newTasks)
@@ -87,19 +86,13 @@ function App() {
      }
 
      const changeTaskTitle  = (taskId: string, newTitle: string, todolistId: string) => {
-
         setTasks({...tasks,[todolistId]:tasks[todolistId].map(el=>el.id===taskId?{...el,title:newTitle}:el)})
-
-        // let ourTodo = tasks[todolistId]
-        // let ourTask = ourTodo.find(task => task.id ===taskId)
-        // if (ourTask){
-        //     ourTask.title = newTitle
-        // }
-        // setTasks({...tasks})
      }
 
        const addNewTitleTodolist = (e: ChangeEvent<HTMLInputElement>) => {
+
           setTitleTodolist(e.currentTarget.value)
+
        }
      
     const addTodolist = () => {
@@ -124,21 +117,11 @@ function App() {
        
             <div className={classes.root}>
 
-            <AppBar position="static">
-                <Toolbar>
-                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h6" className={classes.title}>
-                       <h3 style={{color:"red"}}> La lista,de las tareas</h3>
-                    </Typography>
-                    <Button color="inherit">Login</Button>
-                </Toolbar>
-            </AppBar>
+            <HeaderBar/>
 
             <Container fixed>
 
-           <div style={{display:"flex",padding:"30px"}}>
+           <div  style={{display:"flex",padding:"30px"}}>
 
                     <TextField
                       value={titleTodoList}
@@ -147,7 +130,7 @@ function App() {
 
                      <IconButton
                      onClick={addTodolist}
-                        color={'primary'}> 
+                         color={'primary'}> 
                         < AddBoxIcon />
                     </IconButton> 
              <h4 style={{color:"green"}}> //Este campo , esta para añadir un bloque nuevo.</h4>
@@ -187,7 +170,7 @@ function App() {
                 </Grid>
             </Container>
         </div>
-
+       
     );
  
 }

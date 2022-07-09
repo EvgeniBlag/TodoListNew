@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export const HeaderBar = () => {
     const classes = useStyles();
     return(
+      <div className={classes.root}> 
         <AppBar position="static">
         <Toolbar>
             <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
@@ -32,5 +33,6 @@ export const HeaderBar = () => {
             <Button color="inherit">Login</Button>
         </Toolbar>
     </AppBar> 
+    </div>
     )
 }

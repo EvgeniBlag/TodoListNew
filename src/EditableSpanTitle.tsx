@@ -31,15 +31,6 @@ export const EditableSpanTitle = (props:EditableSpanTitlePropsType) => {
         }
     }
 
-    // const addTask = () => {
-    //     let changeTitle = newTitle.trim();
-    //     if (changeTitle !== "") {
-    //         props.addTask(changeTitle);
-    //         setNewTitle("");
-    //     } else {
-    //         setError("Title is required");
-    //     }
-    // }
 
     return (
         edit ?

@@ -2,23 +2,10 @@ import React, {ChangeEvent, useState} from 'react';
 import {Todolist} from './Todolist';
 import {v1} from 'uuid';
 import { Container, Grid, IconButton, TextField  } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import { HeaderBar } from './HeaderBar';
 
- const useStyles = makeStyles((theme: Theme) =>
-   createStyles({
-     root: {
-       flexGrow: 1,
-     },
-     menuButton: {
-       marginRight: theme.spacing(2),
-     },
-     title: {
-       flexGrow: 1,
-     },
-   }),
- );
+
 
 export type todolistsType = {
         id: string
@@ -35,7 +22,7 @@ function App() {
     let todolistID1=v1();
     let todolistID2=v1();
 
-     const classes = useStyles();
+   
 
     let [todolists, setTodolists] = useState<Array<todolistsType>>([
         {id: todolistID1, title: 'What to learn', filter: 'all'},
@@ -114,11 +101,10 @@ function App() {
     }
      
     return (
-       
-            <div className={classes.root}>
-
+            <div>
+                
             <HeaderBar/>
-
+          
             <Container fixed>
 
            <div  style={{display:"flex",padding:"30px"}}>
@@ -169,7 +155,8 @@ function App() {
                 })}
                 </Grid>
             </Container>
-        </div>
+          </div>
+      
        
     );
  

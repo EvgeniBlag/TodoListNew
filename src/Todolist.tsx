@@ -12,6 +12,9 @@ export type TaskType = {
     title: string
     isDone: boolean
 }
+export type ObjTaskType = {
+    [key: string] : TaskType[]
+}
 
 type PropsType = {
     todolistID:string

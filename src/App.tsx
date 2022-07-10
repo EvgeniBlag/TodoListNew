@@ -1,9 +1,10 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useState, useReducer} from 'react';
 import {Todolist} from './Todolist';
 import {v1} from 'uuid';
 import { Container, Grid, IconButton, TextField  } from '@material-ui/core';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import { HeaderBar } from './HeaderBar';
+import { removeTaskAC, TasksReducer } from './redusers/TasksReduser';
 
 
 
@@ -36,7 +37,24 @@ function App() {
         setTasks (newTasks)
      }
 
-    let [tasks, setTasks] = useState({
+    //  let [tasks, setTasks] = useState({
+    //      [todolistID1]:[
+    //          {id: v1(), title: "HTML&CSS", isDone: true},
+    //          {id: v1(), title: "JS", isDone: true},
+    //          {id: v1(), title: "ReactJS", isDone: false},
+    //          {id: v1(), title: "Rest API", isDone: false},
+    //          {id: v1(), title: "GraphQL", isDone: false},
+    //      ],
+    //      [todolistID2]:[
+    //          {id: v1(), title: "HTML&CSS2", isDone: true},
+    //          {id: v1(), title: "JS2", isDone: true},
+    //          {id: v1(), title: "ReactJS2", isDone: false},
+    //          {id: v1(), title: "Rest API2", isDone: false},
+    //          {id: v1(), title: "GraphQL2", isDone: false},
+    //      ]
+    //  });
+
+     let [tasks, dispatchTasks] = useReducer(TasksReducer,{
         [todolistID1]:[
             {id: v1(), title: "HTML&CSS", isDone: true},
             {id: v1(), title: "JS", isDone: true},
@@ -55,7 +73,8 @@ function App() {
 
       function removeTask(todolistID:string, id: string) {
        
-          setTasks({...tasks,[todolistID]:tasks[todolistID].filter(t=>t.id != id)});
+        //   setTasks({...tasks,[todolistID]:tasks[todolistID].filter(t=>t.id != id)});
+        dispatchTasks(removeTaskAC(todolistID, id))
       }
 
       function addTask(todolistID:string,title: string) {
@@ -65,7 +84,7 @@ function App() {
       }
 
       function changeStatus(todolistID:string, taskId: string, isDone: boolean) {
-           setTasks({...tasks,[todolistID]:tasks[todolistID].map(t=>t.id === taskId ? {...t,isDone:isDone}:t)});
+           dispatchTasks({...tasks,[todolistID]:tasks[todolistID].map(t=>t.id === taskId ? {...t,isDone:isDone}:t)});
       }
 
      function changeFilter(todolistID:string,value: FilterValuesType) {
@@ -73,7 +92,7 @@ function App() {
      }
 
      const changeTaskTitle  = (taskId: string, newTitle: string, todolistId: string) => {
-        setTasks({...tasks,[todolistId]:tasks[todolistId].map(el=>el.id===taskId?{...el,title:newTitle}:el)})
+        dispatchTasks({...tasks,[todolistId]:tasks[todolistId].map(el=>el.id===taskId?{...el,title:newTitle}:el)})
      }
 
        const addNewTitleTodolist = (e: ChangeEvent<HTMLInputElement>) => {
@@ -86,7 +105,7 @@ function App() {
         const newId = v1();
         const newTodolist: todolistsType = { id: newId, title: titleTodoList, filter: 'all' }
         setTodolists([newTodolist, ...todolists])
-        setTasks({...tasks, [newId]: [
+        dispatchTasks({...tasks, [newId]: [
                 { id: v1(), title: "HTML&CSS2", isDone: true },
                 { id: v1(), title: "JS2", isDone: true },
                 { id: v1(), title: "ReactJS2", isDone: false },
@@ -102,7 +121,7 @@ function App() {
      
     return (
             <div>
-                
+
             <HeaderBar/>
           
             <Container fixed>

@@ -4,7 +4,7 @@ import {v1} from 'uuid';
 import { Container, Grid, IconButton, TextField  } from '@material-ui/core';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import { HeaderBar } from './HeaderBar';
-import { removeTaskAC, TasksReducer } from './redusers/TasksReduser';
+import { addTaskAC, removeTaskAC, TasksReducer } from './redusers/TasksReduser';
 
 
 
@@ -78,13 +78,12 @@ function App() {
       }
 
       function addTask(todolistID:string,title: string) {
-          let newTask = {id: v1(), title: title, isDone: false};
-       
-          setTasks({...tasks,[todolistID]: [newTask, ...tasks[todolistID]]});
+          
+          dispatchTasks(addTaskAC(todolistID,title));
       }
 
       function changeStatus(todolistID:string, taskId: string, isDone: boolean) {
-           dispatchTasks({...tasks,[todolistID]:tasks[todolistID].map(t=>t.id === taskId ? {...t,isDone:isDone}:t)});
+           dispatchTasks(changeStatusAC(todolistID,taskId,isDone));
       }
 
      function changeFilter(todolistID:string,value: FilterValuesType) {

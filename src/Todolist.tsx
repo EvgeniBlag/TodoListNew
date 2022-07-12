@@ -16,6 +16,8 @@ export type ObjTaskType = {
     [key: string] : TaskType[]
 }
 
+
+
 type PropsType = {
     todolistID:string
     title: string

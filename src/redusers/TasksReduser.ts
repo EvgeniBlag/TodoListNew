@@ -1,7 +1,9 @@
+
 import { v1 } from "uuid";
 import { ObjTaskType } from "../Todolist"
+import { removeTodoListACType,changeFilterAC, addTodolistACType} from "./TodoListReduser";
 
-export const TasksReducer = ( state: ObjTaskType, action:tsarACType ) => {
+export const TasksReducer = ( state: ObjTaskType, action:tsarACType ):ObjTaskType => {
 
   switch (action.type) {
 
@@ -25,10 +27,33 @@ export const TasksReducer = ( state: ObjTaskType, action:tsarACType ) => {
 
       return{...state,[action.payload.todolistID]
          :state[action.payload.todolistID]
-         .map(t = t.payload.id === t.payload.taskId ? {...t,t.payload.isDone}:t)}
+         .map(t => t.id === action.payload.taskId ? {...t, isDone: action.payload.isDone}:t)}
 
      }
+       
+  
 
+   case "CHANGE-TASK-TITLE-AC":{
+      
+      return{
+         // dispatchTasks({...tasks,[todolistId]:tasks[todolistId].map(el=>el.id===taskId?{...el,title:newTitle}:el)})
+            ...state,[action.payload.todolistId]:
+            state[action.payload.todolistId].map(el=>el.id===action.payload.taskId ? {...el,title:action.payload.newTitle}:el)
+      }
+   }
+
+   case"REMOVE-TODOLIST": {
+      const copyState = {...state}
+      delete copyState[action.payload.id]
+      
+      return copyState
+    }
+
+    case "ADD-TODOLIST": {
+      const copyState = {...state}
+      copyState[action.payload.todo.id] = []
+      return copyState
+    }
 
   
       default: return state
@@ -37,7 +62,10 @@ export const TasksReducer = ( state: ObjTaskType, action:tsarACType ) => {
 }
 
 
-type tsarACType = removeTaskACType | addTaskACType | changeStatusACType | changeFilterACType
+
+type tsarACType =
+   removeTaskACType | addTaskACType |
+   changeStatusACType | changeTaskTitleACType |removeTodoListACType | addTodolistACType
 
 
 type removeTaskACType = ReturnType<typeof removeTaskAC> 
@@ -76,10 +104,15 @@ export const changeStatusAC = (todolistID:string, taskId: string, isDone: boolea
    } as const
 }
 
-type changeFilterACType = ReturnType<typeof changeFilterAC>
-export const changeFilterAC = () => {
+type changeTaskTitleACType = ReturnType<typeof changeTaskTitleAC>
+export const changeTaskTitleAC = (taskId: string, newTitle: string, todolistId: string) => {
+    
    return{
-      type:"CHANGE-FILTER",
-
-   }
+      type:"CHANGE-TASK-TITLE-AC",
+      payload:{
+         taskId:taskId,
+         newTitle:newTitle,
+         todolistId:todolistId
+      }
+   } as const
 }

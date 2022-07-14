@@ -13,7 +13,7 @@ export type TaskType = {
     isDone: boolean
 }
 export type ObjTaskType = {
-    [key: string] : TaskType[]
+    [key: string] : TaskType[],
 }
 
 

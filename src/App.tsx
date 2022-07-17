@@ -6,6 +6,7 @@ import AddBoxIcon from '@material-ui/icons/AddBox';
 import { HeaderBar } from './HeaderBar';
 import { addTaskAC, changeStatusAC, changeTaskTitleAC, removeTaskAC, TasksReducer } from './redusers/TasksReduser';
 import { editTodolistAC, removeTodoListAC, TodoListReduser, changeFilterAC, addTodolistAC } from './redusers/TodoListReduser';
+import { FilterHdrSharp } from '@material-ui/icons';
 
 
 
@@ -184,16 +185,54 @@ export type Man1Type = {
 export type Man2Type = {
    height:number
    name:string
-}
-export type CarType = {
-  model:string
-  year:number
+   age:string
 }
 
 let Man1:Man1Type = { name:"Sasha", height:1.75 }
-let Man2:Man2Type = { name:"Arnold", height:1.95 }
-let car = {model:"Biuiq",year: 2020}
+let Man2:Man2Type = { name:"Arnold", height:1.95 , age:"18"}
 
-let UniMan: Array<FullType> = [ Man1, Man2 ,car]
+let car = {model:"Reno Stepway", year: 2016}
+
+
+type CarType = {
+    model : string
+    year: number 
+    // on : boolean
+    // turnOn : void
+    // rename: (model:string) => string
+}
+
+
+
+
+export type GarageType = {
+    cars:Array<CarType>
+    model:string
+    year:number
+    addCar:(car:CarType)=>void
+    logAllCarsNames:()=>void
+    getAllCars:()=>Array<CarType>
+  }
+
+  let createGarage = ():GarageType => {
+    let cars:Array<CarType> = []
+
+    return {
+         addCar(car) {
+            cars.push(car)
+        },
+        logAllCarsNames() {
+            console.log ("Cars in the garage");
+            cars.forEach( c => console.log (c.model) )
+        },
+        getAllCars() {
+            return cars;
+        }
+    }
+  }
+
+
+
+
 
 

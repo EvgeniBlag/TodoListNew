@@ -86,7 +86,7 @@ function App() {
     }
 
     const addTodolist = () => {
-        debugger
+
         const newId = v1();
         const newTodolist: todolistsType = { id: newId, title: titleTodoList, filter: 'all' }
         // dispatchTodoList([newTodolist, ...todolists])
@@ -170,5 +170,30 @@ function App() {
 }
 
 export default App;
+
+
+
+
+
+export type FullType = Man1Type|Man2Type|CarType
+
+export type Man1Type = {
+   height:number
+   name:string
+}
+export type Man2Type = {
+   height:number
+   name:string
+}
+export type CarType = {
+  model:string
+  year:number
+}
+
+let Man1:Man1Type = { name:"Sasha", height:1.75 }
+let Man2:Man2Type = { name:"Arnold", height:1.95 }
+let car = {model:"Biuiq",year: 2020}
+
+let UniMan: Array<FullType> = [ Man1, Man2 ,car]
 
 

@@ -83,10 +83,6 @@ export function Todolist(props: PropsType) {
         props.changeTaskTitle(taskId, newTitle, props.todolistID)
     }
 
-    // const addTaskHandler = (title:string)=>{
-    //     props.addTask(title,props.id)
-    // }
-
     const editTodolistHandler=(newTitle:string)=>{
       props.editTodolist(props.todolistID,newTitle)
     }

@@ -23,21 +23,13 @@ export const TodoListReduser = (state: todolistsType[], action: AllType): todoli
       }
 
       case "ADD-TODOLIST": {
-         //       dispatchTodoList([newTodolist, ...todolists])
-         //  dispatchTasks({...tasks, [newId]: [
-         //         { id: v1(), title: "HTML&CSS2", isDone: true },
-         //          { id: v1(), title: "JS2", isDone: true },
-         //          { id: v1(), title: "ReactJS2", isDone: false },
-         //            { id: v1(), title: "Rest API2", isDone: false },]
-         //    })
-         // return [newTodolist,...state]
-         // {...state,[newId]:[...state]}
-
-
+    
          return [...state, action.payload.todo]
-        
-
       }
+
+      // case "ADD-TASK-AC":{
+      //    ...state
+      // }
 
       default: return state
 
@@ -90,6 +82,19 @@ export const addTodolistAC = (todo: todolistsType) => {
       }
    } as const
 }
+
+//  export type addTaskACType = ReturnType<typeof addTaskAC>
+
+//  export const addTaskAC = (todolistID: string, title: string) => {
+//     return{
+//       type:"ADD-TASK-AC",
+//        payload:{
+//          todolistID:todolistID,
+//          title:title
+//        }
+
+//    } as const 
+//  }
 
 
 

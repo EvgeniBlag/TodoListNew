@@ -27,15 +27,14 @@ export const TodoListReduser = (state: todolistsType[], action: AllType): todoli
          return [...state, action.payload.todo]
       }
 
-      // case "ADD-TASK-AC":{
-      //    ...state
-      // }
-
+     
       default: return state
 
    }
 }
-export type AllType = changeFilterACType | removeTodoListACType | editTodolistACType | addTodolistACType
+export type AllType =
+                  changeFilterACType | removeTodoListACType |
+                  editTodolistACType | addTodolistACType
 
 export type changeFilterACType = ReturnType<typeof changeFilterAC>
 export const changeFilterAC = (todolistID: string, value: FilterValuesType) => {

@@ -191,7 +191,7 @@ export type Man2Type = {
 let Man1:Man1Type = { name:"Sasha", height:1.75 }
 let Man2:Man2Type = { name:"Arnold", height:1.95 , age:"18"}
 
-let car = {model:"Reno Stepway", year: 2016}
+let car:CarType = {model:"Reno Stepway", year: 2016}
 
 
 type CarType = {
@@ -206,9 +206,6 @@ type CarType = {
 
 
 export type GarageType = {
-    cars:Array<CarType>
-    model:string
-    year:number
     addCar:(car:CarType)=>void
     logAllCarsNames:()=>void
     getAllCars:()=>Array<CarType>

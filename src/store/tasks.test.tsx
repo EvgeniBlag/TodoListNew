@@ -1,4 +1,4 @@
-import {sum,sub, multiply} from "./tasks"
+import {sum,sub, multiply, StateType, ActionType, salaryReduser} from "./tasks"
 
 
     test("Sueldo del trabajador", () => {
@@ -45,8 +45,35 @@ import {sum,sub, multiply} from "./tasks"
          expect(result3).toBe(6)
          expect(x).toBe(2)
          expect(y).toBe(3)
+    })
 
 
+
+
+
+
+
+
+
+
+
+
+
+    test("salary reduser", () => {
+
+        //1 Data :
+
+        const state: StateType = 1000
+        const action: ActionType = {
+            type:"SUM",
+            n:100
+        }
+        //2 function
+        const resultAction = salaryReduser(state,action)
+
+        //3 test
+
+        expect(resultAction).toBe(1100)
 
     })
 

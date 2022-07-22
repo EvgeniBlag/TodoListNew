@@ -4,6 +4,7 @@ import { FilterValuesType, todolistsType } from "../App"
 
 
 export const TodoListReduser = (state: todolistsType[], action: AllType): todolistsType[] => {
+   
    switch (action.type) {
 
       case "CHANGE-FILTER": {

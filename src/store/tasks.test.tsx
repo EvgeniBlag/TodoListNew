@@ -1,4 +1,4 @@
-import {sum,sub} from "./tasks"
+import {sum,sub, multiply} from "./tasks"
 
 
     test("Sueldo del trabajador", () => {
@@ -28,6 +28,24 @@ import {sum,sub} from "./tasks"
         expect(salary).toBe(1000)
         expect(n).toBe(100)
         expect(sub(300,200)).toBe(100)
+    })
+
+
+
+    test ("multiplicamos equis a ygriega", ()=>{
+        //1data:
+        const x :number = 2
+        const y :number = 3
+
+        //2functhion test
+           const result3 = multiply(x,y)
+
+         //3Test
+         
+         expect(result3).toBe(6)
+         expect(x).toBe(2)
+         expect(y).toBe(3)
+
 
 
     })

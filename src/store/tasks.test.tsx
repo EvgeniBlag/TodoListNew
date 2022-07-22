@@ -50,30 +50,58 @@ import {sum,sub, multiply, StateType, ActionType, salaryReduser} from "./tasks"
 
 
 
-
-
-
-
-
-
-
-
-
-    test("salary reduser", () => {
-
-        //1 Data :
-
-        const state: StateType = 1000
-        const action: ActionType = {
+    test("salaryReduser SUM", ()=> {
+        //1 Data:
+        const state:StateType= 90
+        const action:ActionType={
             type:"SUM",
             n:100
         }
-        //2 function
-        const resultAction = salaryReduser(state,action)
 
-        //3 test
+        //2 function:
+       const resultSum = salaryReduser(state,action)
 
-        expect(resultAction).toBe(1100)
+       //3 Test:
 
+       expect(resultSum).toBe(190)
     })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // test("salary reduser", () => {
+
+    //     //1 Data :
+
+    //     const state: StateType = 1000
+    //     const action: ActionType = {
+    //         type:"SUM",
+    //         n:100
+    //     }
+    //     //2 function
+    //     const resultAction = salaryReduser(state,action)
+
+    //     //3 test
+
+    //     expect(resultAction).toBe(1100)
+
+    // })
 

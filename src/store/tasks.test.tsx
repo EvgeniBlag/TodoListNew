@@ -1,94 +1,55 @@
-import {sum,sub, multiply, StateType, ActionType, familyBlagodarnyy} from "./tasks"
-
-
-    test("Sueldo del trabajador", () => {
-
-        //1 Datos del test:
-        const salary: number = 800 
-        const n: number = 200
-    
-        //2 Realizar test:
-        const result = sum(salary,n)
-    
-        //3 Revision resulta:
-        expect(result).toBe(1000)
-    })
-
-    test("Reducir solario del trabajador",()=>{
-
-        //1 Datos del test:
-        const salary: number = 1000
-        const n: number = 100
-
-        //2 Realisar test:
-        const result2 = sub(salary,n)
-
-        //3Revicion resulta:
-        expect(result2).toBe(900)
-        expect(salary).toBe(1000)
-        expect(n).toBe(100)
-        expect(sub(300,200)).toBe(100)
-    })
-
-
-
-    test ("multiplicamos equis a ygriega", ()=>{
-        //1data:
-        const x :number = 2
-        const y :number = 3
-
-        //2functhion test
-           const result3 = multiply(x,y)
-
-         //3Test
-         
-         expect(result3).toBe(6)
-         expect(x).toBe(2)
-         expect(y).toBe(3)
-    })
+import {sum,sub, multiply, StateType, ALLActionType, universalComponent} from "./tasks"
 
 
 
 
-    // test("salaryReduser SUM", ()=> {
-    //     //1 Data:
-    //     const state:StateType= 90
-    //     const action:ActionType={
-    //         type:"SUM",
-    //         n:100
-    //     }
-
-    //     //2 function:
-    //    const resultSum = salaryReduser(state,action)
-
-    //    //3 Test:
-
-    //    expect(resultSum).toBe(190)
-    // })
-
-
-
-
-
-
-
-
-test("Test para restar familia Blagodarnyy", ()=>{
+test("Testing universalComponent",()=>{
     //1Data:
-    const state:StateType = 5
-    const action:ActionType = {
-        type:"RESTING",
-        evgeny:11,
-        uliana:22,
-        aria:2
+
+    const state:StateType = 10
+
+    const actionMenos:ALLActionType ={
+        type:"MENOS",
+        n:3,
+        m:81
+    }
+    const actionPlus:ALLActionType ={
+        type:"PLUS",
+        n:32,
+        m:8
+    }
+    const actionMultiply:ALLActionType ={
+        type:"MULTIPLU",
+        n:2,
+        m:81
     }
 
     //2functionTest:
-    const restingFamilyBlagodarnyy = familyBlagodarnyy(state,action)
+    const probeMenosUniversalComponent = universalComponent(state,actionMenos)
+    const probePlusUniversalComponent = universalComponent(state,actionPlus)
+    const probeMultiplyUniversalComponent = universalComponent(state,actionMultiply)
+
+
 
     //3Test:
-    expect(restingFamilyBlagodarnyy).toBe(-28)
+    expect(probeMenosUniversalComponent).toBe(-71)
+    expect(probePlusUniversalComponent).toBe(42)
+    expect(probeMultiplyUniversalComponent).toBe(1620)
+    expect(universalComponent(state,actionMultiply)).toBe(1620)
 })
+
+
+
+
+ 
+
+
+
+
+
+
+
+
 
 
 

@@ -1,4 +1,4 @@
-import {sum,sub, multiply, StateType, ActionType, salaryReduser} from "./tasks"
+import {sum,sub, multiply, StateType, ActionType, multiplyAction} from "./tasks"
 
 
     test("Sueldo del trabajador", () => {
@@ -50,58 +50,55 @@ import {sum,sub, multiply, StateType, ActionType, salaryReduser} from "./tasks"
 
 
 
-    test("salaryReduser SUM", ()=> {
-        //1 Data:
-        const state:StateType= 90
-        const action:ActionType={
-            type:"SUM",
-            n:100
-        }
-
-        //2 function:
-       const resultSum = salaryReduser(state,action)
-
-       //3 Test:
-
-       expect(resultSum).toBe(190)
-    })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // test("salary reduser", () => {
-
-    //     //1 Data :
-
-    //     const state: StateType = 1000
-    //     const action: ActionType = {
+    // test("salaryReduser SUM", ()=> {
+    //     //1 Data:
+    //     const state:StateType= 90
+    //     const action:ActionType={
     //         type:"SUM",
     //         n:100
     //     }
-    //     //2 function
-    //     const resultAction = salaryReduser(state,action)
 
-    //     //3 test
+    //     //2 function:
+    //    const resultSum = salaryReduser(state,action)
 
-    //     expect(resultAction).toBe(1100)
+    //    //3 Test:
 
+    //    expect(resultSum).toBe(190)
     // })
+
+
+
+
+
+
+
+
+
+
+
+
+test("This test for multiply action",()=>{
+    //1Data:
+    const state:StateType = 1000
+    const action:ActionType = {
+        type:"MULTIPLY",
+        item:2
+    } 
+
+    //2FunctionTest:
+    const resultMultiply = multiplyAction(state,action)
+
+    //3Test:
+    expect(resultMultiply).toBe(2000)
+})
+
+
+
+
+
+
+
+
+
+
 

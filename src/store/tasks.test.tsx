@@ -1,4 +1,4 @@
-import {sum,sub, multiply, StateType, ActionType, multiplyAction} from "./tasks"
+import {sum,sub, multiply, StateType, ActionType, familyBlagodarnyy} from "./tasks"
 
 
     test("Sueldo del trabajador", () => {
@@ -73,24 +73,26 @@ import {sum,sub, multiply, StateType, ActionType, multiplyAction} from "./tasks"
 
 
 
-
-
-
-
-test("This test for multiply action",()=>{
+test("Test para restar familia Blagodarnyy", ()=>{
     //1Data:
-    const state:StateType = 1000
+    const state:StateType = 5
     const action:ActionType = {
-        type:"MULTIPLY",
-        item:2
-    } 
+        type:"RESTING",
+        evgeny:11,
+        uliana:22,
+        aria:2
+    }
 
-    //2FunctionTest:
-    const resultMultiply = multiplyAction(state,action)
+    //2functionTest:
+    const restingFamilyBlagodarnyy = familyBlagodarnyy(state,action)
 
     //3Test:
-    expect(resultMultiply).toBe(2000)
+    expect(restingFamilyBlagodarnyy).toBe(-28)
 })
+
+
+
+
 
 
 

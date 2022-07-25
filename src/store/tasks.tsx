@@ -28,25 +28,26 @@ export const multiply = (x:number,y:number) =>  x * y
 //     }
 // }
 
-export type ActionType = {
-    type:"MULTIPLY",
-    item:number
-}
-
 export type StateType = number
 
-
-
-
-export const multiplyAction = (state:StateType,action:ActionType) => {
-    switch(action.type){
-        case"MULTIPLY":
-       return state * action.item
-       
-        default:
-        return state
-    }
+export type ActionType = {
+    type:"RESTING"
+    evgeny:number
+    uliana:number
+    aria:number
 }
+
+export const familyBlagodarnyy = (state:StateType,action:ActionType) => {
+     switch(action.type){
+        case"RESTING":
+
+       return state + action.evgeny - action.uliana * action.aria
+
+       dafault: return state
+
+     }
+}
+
 
 
 

@@ -68,38 +68,57 @@
 // }
 
 
- export type FullType = Plus|Menos
+//  export type FullType = Plus|Menos
 
- export type StateType = number
+//  export type StateType = number
 
- export type Plus = {
-     type:"PLUS"
-     a:number 
-     b:number 
- }
+//  export type Plus = {
+//      type:"PLUS"
+//      a:number 
+//      b:number 
+//  }
 
- export type Menos = {
-     type:"MENOS"
-     t:number 
-     y:number
- }
+//  export type Menos = {
+//      type:"MENOS"
+//      t:number 
+//      y:number
+//  }
 
- export const universalComponent = (state:StateType,action:FullType) =>{
-     switch(action.type){
-         case "PLUS":
-             return state + action.a + action.b
+//  export const universalComponent = (state:StateType,action:FullType) =>{
+//      switch(action.type){
+//          case "PLUS":
+//              return state + action.a + action.b
 
-            case "MENOS":
-                return state + action.t + action.y
+//             case "MENOS":
+//                 return state + action.t + action.y
     
-            default:
-             return  state
-     }
+//             default:
+//              return  state
+//      }
    
- }
+//  }
 
 
+export type StateType = number
 
+export type TodoType = MultipluType
+
+export type MultipluType = {
+    type:"MULTIPLU"
+    a:number 
+    b:number
+}
+
+export const nuestraComponenta = (state:StateType,action:TodoType)=>{
+    switch(action.type){
+        case"MULTIPLU":
+        return state * action.a * action.b
+
+        default:
+            return state
+    }
+   
+}
 
 
 

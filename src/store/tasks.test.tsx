@@ -1,4 +1,4 @@
- import {sum,sub, multiply, StateType, ALLActionType, universalComponent, FullType} from "./tasks"
+ import {sum,sub, multiply, StateType, ALLActionType, universalComponent, FullType, TodoType, nuestraComponenta} from "./tasks"
 
 
 
@@ -57,34 +57,44 @@
 
 
 
- test("probe,of primitiv function",()=>{
+//   test("probe,of primitiv function",()=>{
 
+//     //Data1:
+//      const state:StateType = 15
+
+
+//      const testPlus:FullType = {
+//         type:"PLUS",
+//         a:3,
+//         b:6
+//     }
+
+//     const testMenos : FullType ={
+//         type:"MENOS",
+//         t:1,
+//         y:2
+//     }
+
+//     //Test2:
+
+//     expect(universalComponent(state,testPlus)).toBe(24)
+//      expect(universalComponent(state,testMenos)).toBe(18)
+//   })
+
+const state = 2
+
+
+test("Hacemos test de nuestraComponenta",()=>{
     //Data1:
-    const state:StateType = 15
-
-
-     const testPlus:FullType = {
-        type:"PLUS",
-        a:3,
-        b:6
-    }
-
-    const testMenos : FullType ={
-        type:"MENOS",
-        t:1,
-        y:2
+    const probeMultiplu:TodoType ={
+        type:"MULTIPLU",
+        a:2,
+        b:3
     }
 
     //Test2:
-
-    expect(universalComponent(state,testPlus)).toBe(24)
-    expect(universalComponent(state,testMenos)).toBe(18)
- })
-
-
-
-
-
+    expect(nuestraComponenta(state,probeMultiplu)).toBe(12)
+})
 
 
 

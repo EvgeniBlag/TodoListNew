@@ -10,6 +10,7 @@ export const TasksReducer = (state: ObjTaskType, action: tsarACType): ObjTaskTyp
       case "REMOVE-TASK": {
          //   setTasks({...tasks,[todolistID]:tasks[todolistID].filter(t=>t.id != id)});
          return {
+     
             ...state, [action.payload.todolistID]: state[action.payload.todolistID]
                .filter(t => t.id !== action.payload.id)
          }
@@ -57,7 +58,6 @@ export const TasksReducer = (state: ObjTaskType, action: tsarACType): ObjTaskTyp
          return copyState
       }
 
-  
       default: return state
   }
 }

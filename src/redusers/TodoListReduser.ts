@@ -4,7 +4,7 @@ import { FilterValuesType, todolistsType } from "../App"
 
 
 export const TodoListReduser = (state: todolistsType[], action: AllType): todolistsType[] => {
-   
+
    switch (action.type) {
 
       case "CHANGE-FILTER": {
@@ -83,18 +83,7 @@ export const addTodolistAC = (todo: todolistsType) => {
    } as const
 }
 
-//  export type addTaskACType = ReturnType<typeof addTaskAC>
 
-//  export const addTaskAC = (todolistID: string, title: string) => {
-//     return{
-//       type:"ADD-TASK-AC",
-//        payload:{
-//          todolistID:todolistID,
-//          title:title
-//        }
-
-//    } as const 
-//  }
 
 
 

@@ -13,13 +13,22 @@ test("corecto eliminacion del todoList",()=>{
     ]
 
     //TestFinction2:
-    const endState = TodoListReduser(state,removeTodoListAC(todolistId2))
+
+      const endState = TodoListReduser( state, {type:"REMOVE-TODOLIST" , payload:{id:todolistId2}})
+
+     const midleState = TodoListReduser(state, removeTodoListAC(todolistId1))
 
 
     //Test3:
-    expect(endState.length).toBe(1)
-    expect(endState[0].id).toBe(todolistId1)
-    expect(endState[0].title).toBe("What to learn")
-    // expect(endState[0].title).notToBe("What to buy")
-    
+     expect(endState.length).toBe(1)
+     expect(endState[0].id).toBe(todolistId1)
+     expect(endState[0].title).toBe("What to learn")
+
+
+    //  expect(endState[0].title).notToBe("What to buy")
+     expect(midleState[0].title).toBe("What to buy")
+     expect(midleState.length).toBe(1)
+     expect(midleState[0].id).toBe(todolistId2)
+     expect(midleState[0].filter).toBe("all")
+
 })

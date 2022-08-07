@@ -33,9 +33,13 @@ export const TodoListReduser = (state: todolistsType[], action: AllType): todoli
 
    }
 }
+
+
 export type AllType =
                   changeFilterACType | removeTodoListACType |
                   editTodolistACType | addTodolistACType
+
+                  
 
 export type changeFilterACType = ReturnType<typeof changeFilterAC>
 export const changeFilterAC = (todolistID: string, value: FilterValuesType) => {

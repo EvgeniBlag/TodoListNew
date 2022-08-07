@@ -68,26 +68,35 @@
 // }
 
 
-export type FullType = Plus
+ export type FullType = Plus|Menos
 
-export type StateType = number
+ export type StateType = number
 
-export type Plus = {
-    type:"PLUS"
-    a:number 
-    b:number 
-}
+ export type Plus = {
+     type:"PLUS"
+     a:number 
+     b:number 
+ }
 
-export const universalComponent = (state:StateType,action:FullType) =>{
-    switch(action.type){
-        case "PLUS":
-            return state + action.a + action.b
+ export type Menos = {
+     type:"MENOS"
+     t:number 
+     y:number
+ }
+
+ export const universalComponent = (state:StateType,action:FullType) =>{
+     switch(action.type){
+         case "PLUS":
+             return state + action.a + action.b
+
+            case "MENOS":
+                return state + action.t + action.y
     
             default:
              return  state
-    }
+     }
    
-}
+ }
 
 
 

@@ -69,9 +69,16 @@
         b:6
     }
 
+    const testMenos : FullType ={
+        type:"MENOS",
+        t:1,
+        y:2
+    }
+
     //Test2:
 
     expect(universalComponent(state,testPlus)).toBe(24)
+    expect(universalComponent(state,testMenos)).toBe(18)
  })
 
 

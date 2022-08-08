@@ -3,7 +3,7 @@ import { FilterValuesType, todolistsType } from "../App"
 
 
 
-export const TodoListReduser = (state: todolistsType[], action: AllType): todolistsType[] => {
+export const todoListReduser = (state: todolistsType[], action: AllType): todolistsType[] => {
 
    switch (action.type) {
 

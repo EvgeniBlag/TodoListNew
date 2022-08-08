@@ -1,24 +1,45 @@
 
 import { type } from "os";
 import { v1 } from "uuid"
-import { todolistsType } from "../App";
-import { addTodolistAC, removeTodoListAC, TodoListReduser } from "./TodoListReduser";
+import { FilterValuesType, todolistsType } from "../App";
+import { addTodolistAC, changeFilterAC, removeTodoListAC, todoListReduser } from "./TodoListReduser";
 
-test("corecto eliminacion del todoList",()=>{
-    //Data1:
-    let todolistId1 = v1();
-    let todolistId2 = v1();
+let todolistId1 :string 
+let todolistId2 : string
 
-    const state :todolistsType[]= [
+
+let state:todolistsType[]
+
+beforeEach(()=>{
+
+     todolistId1 = v1();
+     todolistId2 = v1();
+
+     state = [
         {id:todolistId1,title:"What to learn",filter:"all"},
         {id:todolistId2,title:"What to buy",filter:"all"},
     ]
+} )
 
-    //TestFinction2:
 
-      const endState = TodoListReduser( state, {type:"REMOVE-TODOLIST" , payload:{id:todolistId2}})
 
-     const midleState = TodoListReduser(state, removeTodoListAC(todolistId1))
+
+
+test("corecto eliminacion del todoList",()=>{
+    //Data1:
+    // let todolistId1 = v1();
+    // let todolistId2 = v1();
+
+    // const state :todolistsType[]= [
+    //     {id:todolistId1,title:"What to learn",filter:"all"},
+    //     {id:todolistId2,title:"What to buy",filter:"all"},
+    // ]
+
+    //TestFinction2:( state, {type:"REMOVE-TODOLIST" , payload:{id:todolistId2}})
+
+      const endState = todoListReduser (state, removeTodoListAC(todolistId2))
+
+     const midleState = todoListReduser(state, removeTodoListAC(todolistId1))
 
 
     //Test3:
@@ -39,8 +60,8 @@ test("Test para aniadir corecto TodoList y Tasks",()=>{
 
     //Data1:
 
-    let todolistId1 = v1();
-    let todolistId2 = v1();
+    // let todolistId1 = v1();
+    // let todolistId2 = v1();
 
     let newTodolistTitle = "New Todolist";
 
@@ -50,19 +71,52 @@ test("Test para aniadir corecto TodoList y Tasks",()=>{
         filter:"all"
     }
 
-    const state :todolistsType[]= [
-        {id:todolistId1,title:"What to learn",filter:"all"},
-        {id:todolistId2,title:"What to buy",filter:"all"},
-    ]
+    // const state :todolistsType[]= [
+    //     {id:todolistId1,title:"What to learn",filter:"all"},
+    //     {id:todolistId2,title:"What to buy",filter:"all"},
+    // ]
   
     //FunctionTest2:
 
-    const endState = TodoListReduser(state, addTodolistAC(todoList))
+    const endState = todoListReduser(state, addTodolistAC(todoList))
 
     //Test3:
 
     expect(endState.length). toBe(3)
     expect(endState[2].title). toBe("New Todolist")
+    expect(state.length). toBe(2)
+    expect(endState[1].title). toBe("What to buy")
+    expect(endState[0].title). toBe("What to learn")
 
 }
 )
+
+test("Test para cambiar status , a nuestra Task",()=>{
+
+    //Data1:
+
+    // let todolistId1 = v1();
+    // let todolistId2 = v1();
+
+    let newFilter:FilterValuesType = "active"
+
+    // const state :todolistsType[]= [
+    //     {id:todolistId1,title:"What to learn",filter:"all"},
+    //     {id:todolistId2,title:"What to buy",filter:"all"},
+    // ]
+
+    // let value: FilterValuesType
+
+
+   //TestFunction2:
+
+   const endState = todoListReduser (state, changeFilterAC( todolistId1,  newFilter ) )
+
+   //Test3:
+
+   expect(endState[0].filter). toBe("active")
+   expect(endState[1].title). toBe("What to buy")
+   expect(endState[0].title). toBe("What to learn")
+})
+
+

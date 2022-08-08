@@ -9,9 +9,7 @@ export const TodoListReduser = (state: todolistsType[], action: AllType): todoli
 
       case "CHANGE-FILTER": {
          // setTodolists(todolists.map(filtered=>filtered.id===todolistID ? {...filtered,filter:value}:filtered))
-
          return state.map(f => f.id === action.payload.todolistID ? { ...f, filter: action.payload.value } : f)
-
       }
 
       case "REMOVE-TODOLIST": {
@@ -24,20 +22,15 @@ export const TodoListReduser = (state: todolistsType[], action: AllType): todoli
       }
 
       case "ADD-TODOLIST": {
-    
-         return [...state, action.payload.todo]
+         return [...state, action.payload.todoList]
       }
 
-     
       default: return state
-
    }
 }
 
 
-export type AllType =
-                  changeFilterACType | removeTodoListACType |
-                  editTodolistACType | addTodolistACType
+export type AllType = changeFilterACType | removeTodoListACType |editTodolistACType | addTodolistACType
 
 
 
@@ -77,12 +70,12 @@ export const editTodolistAC = (todolistId: string, newTitle: string) => {
 
 export type addTodolistACType = ReturnType<typeof addTodolistAC>
 
-export const addTodolistAC = (todo: todolistsType) => {
+export const addTodolistAC = (todoList: todolistsType) => {
 
    return {
       type: 'ADD-TODOLIST',
       payload: {
-         todo
+         todoList
       }
    } as const
 }

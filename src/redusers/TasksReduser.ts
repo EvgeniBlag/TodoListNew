@@ -45,18 +45,18 @@ export const TasksReducer = (state: ObjTaskType, action: tsarACType): ObjTaskTyp
          }
       }
 
-      case "REMOVE-TODOLIST": {
-         const copyState = { ...state }
+       case "REMOVE-TODOLIST": {
+          const copyState = { ...state }
          delete copyState[action.payload.id]
 
-         return copyState
-      }
+          return copyState
+       }
 
-      case "ADD-TODOLIST": {
-         const copyState = { ...state }
-         copyState[action.payload.todo.id] = []
-         return copyState
-      }
+       case "ADD-TODOLIST": {
+          const copyState = { ...state }
+          copyState[action.payload.todoList.id] = []
+          return copyState
+       }
 
       default: return state
   }

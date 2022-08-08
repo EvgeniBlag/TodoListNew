@@ -1,4 +1,4 @@
- import {sum,sub, multiply, StateType, ALLActionType, universalComponent, FullType, TodoType, nuestraComponenta} from "./tasks"
+ import { TodoType, nuestraComponenta} from "./tasks"
 
 
 

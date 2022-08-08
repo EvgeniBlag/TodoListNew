@@ -5,7 +5,7 @@ import { Container, Grid, IconButton, TextField } from '@material-ui/core';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import { HeaderBar } from './HeaderBar';
 import { addTaskAC, changeStatusAC, changeTaskTitleAC, removeTaskAC, TasksReducer } from './redusers/TasksReduser';
-import { editTodolistAC, removeTodoListAC, TodoListReduser, changeFilterAC, addTodolistAC } from './redusers/TodoListReduser';
+import { editTodolistAC, removeTodoListAC, todoListReduser, changeFilterAC, addTodolistAC } from './redusers/TodoListReduser';
 import { FilterHdrSharp } from '@material-ui/icons';
 
 
@@ -28,7 +28,7 @@ function App() {
 
     // <Array<todolistsType>>
 
-    let [todolists, dispatchTodoList] = useReducer(TodoListReduser, [
+    let [todolists, dispatchTodoList] = useReducer(todoListReduser, [
         { id: todolistID1, title: 'What to learn', filter: 'all' },
         { id: todolistID2, title: 'What to buy', filter: 'all' },
     ])

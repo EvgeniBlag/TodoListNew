@@ -2,7 +2,7 @@
 import { type } from "os";
 import { v1 } from "uuid"
 import { FilterValuesType, todolistsType } from "../App";
-import { addTodolistAC, changeFilterAC, removeTodoListAC, todoListReduser } from "./TodoListReduser";
+import { addTodolistAC, changeFilterAC, editTodolistAC, removeTodoListAC, todoListReduser } from "./TodoListReduser";
 
 let todolistId1 :string 
 let todolistId2 : string
@@ -117,6 +117,25 @@ test("Test para cambiar status , a nuestra Task",()=>{
    expect(endState[0].filter). toBe("active")
    expect(endState[1].title). toBe("What to buy")
    expect(endState[0].title). toBe("What to learn")
+})
+
+test("Test para aniadir nuevo title, a nuestra Task",()=>{
+
+    //Data1:
+
+   let myNewTitle:string = "Hi i am Evgeny"
+
+   //TestFunction2:
+
+   let endState = todoListReduser (state, editTodolistAC (todolistId1,myNewTitle))
+
+   //Test3:
+
+   expect(endState.length). toBe(2)
+   expect(endState[0].title). toBe("Hi i am Evgeny")
+
+
+
 })
 
 

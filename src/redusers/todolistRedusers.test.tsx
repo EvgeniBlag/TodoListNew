@@ -1,8 +1,9 @@
 
-import { type } from "os";
 import { v1 } from "uuid"
 import { FilterValuesType, todolistsType } from "../App";
 import { addTodolistAC, changeFilterAC, editTodolistAC, removeTodoListAC, todoListReduser } from "./TodoListReduser";
+
+
 
 let todolistId1 :string 
 let todolistId2 : string
@@ -25,30 +26,19 @@ beforeEach(()=>{
 
 
 
-test("corecto eliminacion del todoList",()=>{
+test("Corecto eliminacion del todoList",()=>{
     //Data1:
-    // let todolistId1 = v1();
-    // let todolistId2 = v1();
 
-    // const state :todolistsType[]= [
-    //     {id:todolistId1,title:"What to learn",filter:"all"},
-    //     {id:todolistId2,title:"What to buy",filter:"all"},
-    // ]
+    //TestFinction2:
 
-    //TestFinction2:( state, {type:"REMOVE-TODOLIST" , payload:{id:todolistId2}})
-
-      const endState = todoListReduser (state, removeTodoListAC(todolistId2))
-
-     const midleState = todoListReduser(state, removeTodoListAC(todolistId1))
+    const endState = todoListReduser(state, removeTodoListAC(todolistId2))
+    const midleState = todoListReduser(state, removeTodoListAC(todolistId1))
 
 
     //Test3:
      expect(endState.length).toBe(1)
      expect(endState[0].id).toBe(todolistId1)
      expect(endState[0].title).toBe("What to learn")
-
-
-    //  expect(endState[0].title).notToBe("What to buy")
      expect(midleState[0].title).toBe("What to buy")
      expect(midleState.length).toBe(1)
      expect(midleState[0].id).toBe(todolistId2)
@@ -60,9 +50,6 @@ test("Test para aniadir corecto TodoList y Tasks",()=>{
 
     //Data1:
 
-    // let todolistId1 = v1();
-    // let todolistId2 = v1();
-
     let newTodolistTitle = "New Todolist";
 
     let todoList:todolistsType = {
@@ -71,11 +58,6 @@ test("Test para aniadir corecto TodoList y Tasks",()=>{
         filter:"all"
     }
 
-    // const state :todolistsType[]= [
-    //     {id:todolistId1,title:"What to learn",filter:"all"},
-    //     {id:todolistId2,title:"What to buy",filter:"all"},
-    // ]
-  
     //FunctionTest2:
 
     const endState = todoListReduser(state, addTodolistAC(todoList))
@@ -87,26 +69,16 @@ test("Test para aniadir corecto TodoList y Tasks",()=>{
     expect(state.length). toBe(2)
     expect(endState[1].title). toBe("What to buy")
     expect(endState[0].title). toBe("What to learn")
-
 }
 )
+
+
 
 test("Test para cambiar status , a nuestra Task",()=>{
 
     //Data1:
 
-    // let todolistId1 = v1();
-    // let todolistId2 = v1();
-
     let newFilter:FilterValuesType = "active"
-
-    // const state :todolistsType[]= [
-    //     {id:todolistId1,title:"What to learn",filter:"all"},
-    //     {id:todolistId2,title:"What to buy",filter:"all"},
-    // ]
-
-    // let value: FilterValuesType
-
 
    //TestFunction2:
 
@@ -118,6 +90,9 @@ test("Test para cambiar status , a nuestra Task",()=>{
    expect(endState[1].title). toBe("What to buy")
    expect(endState[0].title). toBe("What to learn")
 })
+
+
+
 
 test("Test para aniadir nuevo title, a nuestra Task",()=>{
 
@@ -133,9 +108,6 @@ test("Test para aniadir nuevo title, a nuestra Task",()=>{
 
    expect(endState.length). toBe(2)
    expect(endState[0].title). toBe("Hi i am Evgeny")
-
-
-
 })
 
 
